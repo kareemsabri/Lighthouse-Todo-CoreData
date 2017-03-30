@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "List+CoreDataProperties.h"
 
 @interface TasksViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-@property (strong) id list; //@todo: change this to List class when you create it
+@property (strong) NSManagedObjectContext *context;
+@property (strong) List* list;
 @end

@@ -53,7 +53,7 @@
                                 <rect key="frame" x="16" y="28" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="AiL-MS-Cpr"/>
                                 </connections>
@@ -73,6 +73,7 @@
                     <connections>
                         <outlet property="listTextField" destination="ZK8-vk-YM7" id="8Nd-Lv-Ws7"/>
                         <outlet property="tableView" destination="itN-u4-zBn" id="m4f-XL-gtO"/>
+                        <segue destination="snZ-MR-Iuf" kind="show" identifier="tasksViewController" id="o05-0v-8r8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -91,6 +92,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a new task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UaH-QT-E16">
+                                <rect key="frame" x="16" y="28" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="snZ-MR-Iuf" id="PRa-pD-4rR"/>
+                                </connections>
+                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aW8-2c-BGU">
                                 <rect key="frame" x="0.0" y="113" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,15 +128,6 @@
                                     <outlet property="delegate" destination="snZ-MR-Iuf" id="UI6-cJ-54h"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a new task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UaH-QT-E16">
-                                <rect key="frame" x="16" y="28" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="snZ-MR-Iuf" id="PRa-pD-4rR"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -139,6 +140,9 @@
                             <constraint firstItem="aW8-2c-BGU" firstAttribute="top" secondItem="UaH-QT-E16" secondAttribute="bottom" constant="55" id="imw-HO-BkB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="aW8-2c-BGU" id="1z7-Cy-Kpc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EfL-nK-k2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

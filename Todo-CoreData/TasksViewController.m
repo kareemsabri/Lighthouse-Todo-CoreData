@@ -7,23 +7,39 @@
 //
 
 #import "TasksViewController.h"
+#import "Task+CoreDataProperties.h"
+#import "AppDelegate.h"
 
 @interface TasksViewController ()
-@property NSArray *tasks; //@todo: change this to be array of <Task*> once you create Task model entity/class
+@property NSMutableArray<Task*>* tasks; //@todo: change this to be array of <Task*> once you create Task model entity/class
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation TasksViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //@todo: fetch tasks for list
-    //see https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreData/FetchingObjects.html
-    //specifically section on Filtering Results
+    [self getContext];
+    self.tasks = [self.list.tasks.allObjects mutableCopy];
 }
 
+
+-(void)getContext {
+    AppDelegate *delegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    self.context = delegate.persistentContainer.viewContext;
+}
+
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    //@todo: create task with name from textField value associated with current list
-    //see https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreData/CreatingObjects.html
+    Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.context];
+    task.name = textField.text;
+    NSError* err = nil;
+    [self.list addTasksObject:task];
+    [self.context save:&err];
+    [self.tasks addObject:task];
+    [self.tableView reloadData];
+    textField.text = nil;
+    [textField resignFirstResponder];
     return YES;
 }
 
@@ -37,7 +53,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
-    //set cell name to task name
+    cell.textLabel.text = self.tasks[indexPath.row].name;
     //stretch goal: make this cell a TaskTableViewCell
     //and set cell switch to task completed status, let users toggle the state
     return cell;
